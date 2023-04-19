@@ -27,4 +27,8 @@ public abstract class Espectacle {
         return this._llotges;
     }
     
+    public String getNom(){
+        return this._nom;
+    }
+    
 }

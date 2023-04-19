@@ -5,7 +5,10 @@
 package practicauf4_17;
 
 import Espectacles.*;
+import Recintes.*;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import static utils.UIUtilities.*;
 
@@ -18,6 +21,7 @@ public class PracticaUF4_17 {
     final static List<String> tipusEspectacle = Arrays.asList(
             new String[]{"ObraTeatral","Opera","Pelicula","ProvaEsportiva"});
     public static List<Espectacle> llistaEspectacles;
+    public static List<Recinte> llistaRecintes;
     
     public static void main(String[] args) {
         int opcio = 0;
@@ -64,11 +68,35 @@ public class PracticaUF4_17 {
     }
 
     private static void RegistrarRecinte() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String nomRecinte = llegirString("Nom del recinte: ");
+        int opcio = Menu("Liceu", "PalauEsports", "Teatre");
+        switch (opcio) {
+            case 1:
+                llistaRecintes.add(new Liceu(nomRecinte));
+                break;
+            case 2:
+                llistaRecintes.add(new PalauEsports(nomRecinte));
+                break;
+            case 3:
+                llistaRecintes.add(new Teatre(nomRecinte));
+                break;
+            default:
+                break;
+        }
     }
 
     private static void RegistrarRepresentacio() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int opcio = MenuEspectacle(llistaEspectacles);
+        Espectacle espectacle = llistaEspectacles.get(opcio-1);
+        Recinte recinte = MenuRecinte(llistaRecintes, espectacle);
+        int date = llegirInt("Dia: ");
+        int month = llegirInt("Mes: ");
+        int year = llegirInt("Any: ");
+        int hrs = llegirInt("Hora: ");
+        int min = llegirInt("Minuts: ");
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month, date, hrs, min);
+        Date data = cal.getTime();
     }
 
     private static void Reserves() {

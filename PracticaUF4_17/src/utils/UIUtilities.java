@@ -1,5 +1,7 @@
 package utils;
 
+import Espectacles.Espectacle;
+import Recintes.Recinte;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -196,6 +198,49 @@ public class UIUtilities {
         }
         opcio = escollirOpcio(1, num,"Invalid");
         return opcio;
+    }
+    
+    /**
+     * Funcion para mostrar por pantalla un menu y elegir una opcion
+     * @param datos ArrayList de Strings con las opciones
+     * @return la opcion
+     */
+    public static int MenuEspectacle(List<Espectacle> datos) {
+        int opcio;
+        int num=1;
+        System.out.println("--------------");
+        for (Espectacle a : datos) {
+            System.out.println(num+". "+a.getNom());
+            num++;
+        }
+        opcio = escollirOpcio(1, num,"Invalid");
+        return opcio;
+    }
+    
+    /**
+     * Funcion para mostrar por pantalla un menu y elegir una opcion
+     * @param datos ArrayList de Strings con las opciones
+     * @param espectacle
+     * @return la opcion
+     */
+    public static Recinte MenuRecinte(List<Recinte> datos, Espectacle espectacle) {
+        int opcio;
+        int num=1;
+        List<Recinte> listaFiltrada = new ArrayList<>();
+        System.out.println("--------------");
+        for (Recinte a : datos) {
+            for (String espectacleAdmes : a.getEspectaclesAdmesos()) {
+                if(espectacleAdmes.equals(espectacle.getClass().getSimpleName())){
+                    listaFiltrada.add(a);
+                    System.out.println(num+". "+a.getName()
+                            +"("+a.getClass().getSimpleName()+")");
+            num++;
+                }
+            }
+            
+        }
+        opcio = escollirOpcio(1, num,"Invalid");
+        return listaFiltrada.get(opcio-1);
     }
     
     /**

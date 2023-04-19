@@ -23,4 +23,7 @@ public abstract class Recinte {
         return this._espectaclesAdmesos;
     }
     
+    public String getName(){
+        return this._nom;
+    }
 }
