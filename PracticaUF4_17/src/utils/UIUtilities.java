@@ -2,6 +2,7 @@ package utils;
 
 import Espectacles.Espectacle;
 import Recintes.Recinte;
+import Representacions.Representacio;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -241,6 +242,18 @@ public class UIUtilities {
         }
         opcio = escollirOpcio(1, num,"Invalid");
         return listaFiltrada.get(opcio-1);
+    }
+    
+    public static Representacio MenuRepresentacio(List<Representacio> datos) {
+        int opcio;
+        int num=1;
+        System.out.println("--------------");
+        for (Representacio a : datos) {
+            System.out.println(num+". "+a.getNomRepresentacio());
+            num++;
+        }
+        opcio = escollirOpcio(1, num,"Invalid");
+        return datos.get(opcio-1);
     }
     
     /**
