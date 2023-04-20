@@ -7,13 +7,9 @@ package practicauf4_17;
 import Espectacles.*;
 import Recintes.*;
 import Representacions.Representacio;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import static utils.UIUtilities.*;
 
@@ -36,9 +32,10 @@ public class PracticaUF4_17 {
         int opcio = 0;
         do {
             opcio = Menu("Registrar espectacle", "Registrar recinte",
-                    "Registrar representacio", "Reserves", 
+                    "Registrar representacio", "Reserves",
                     "Llistar espectacles per a una data",
-                    "Llistar butaques i llotges d'una representacio","Sortir");
+                    "Llistar butaques i llotges d'una representacio",
+                    "Sortir");
             switch (opcio) {
                 case 1:
                     RegistrarEspectacle();
@@ -86,7 +83,8 @@ public class PracticaUF4_17 {
 
     private static void RegistrarRecinte() {
         String nomRecinte = llegirString("Nom del recinte: ");
-        int opcio = Menu("Liceu", "PalauEsports", "Teatre");
+        int opcio = Menu("Liceu", "PalauEsports",
+                 "Teatre");
         switch (opcio) {
             case 1:
                 llistaRecintes.add(new Liceu(nomRecinte));
@@ -120,7 +118,8 @@ public class PracticaUF4_17 {
         }
         boolean[] llotges = new boolean[nllotges];
         llistaRepresentacions.add(
-                new Representacio(espectacle, recinte, data, butaques, llotges));
+                new Representacio(espectacle, recinte,
+                        data, butaques, llotges));
     }
 
     private static LocalDateTime registrarDate() {
@@ -129,7 +128,8 @@ public class PracticaUF4_17 {
         int year = llegirInt("Any: ");
         int hrs = llegirInt("Hora: ");
         int min = llegirInt("Minuts: ");
-        LocalDateTime data = LocalDateTime.of(year, month,day, hrs, min);
+        LocalDateTime data = LocalDateTime.of(year, month,
+                day, hrs, min);
         return data;
     }
 
@@ -140,17 +140,19 @@ public class PracticaUF4_17 {
     }
 
     private static void reservaButaques(Representacio representacio) {
-        System.out.println("Reservar butaca?");
-        int opcio = Menu("Si", "No");
-        if (opcio == 1) {
-            mostrarSeients(representacio);
-            int fila = llegirInt("Fila: ") - 1;
-            int columna = llegirInt("Columna: ") - 1;
-            boolean reservat = representacio.reservarSeient(fila, columna);
-            if (reservat) {
-                System.out.println("Reserva feta!");
-            } else {
-                System.out.println("No es pot fer la reserva");
+        if (representacio.getEspectacle().getPatiDeButaques()) {
+            System.out.println("Reservar butaca?");
+            int opcio = Menu("Si", "No");
+            if (opcio == 1) {
+                mostrarSeients(representacio);
+                int fila = llegirInt("Fila: ") - 1;
+                int columna = llegirInt("Columna: ") - 1;
+                boolean reservat = representacio.reservarSeient(fila, columna);
+                if (reservat) {
+                    System.out.println("Reserva feta!");
+                } else {
+                    System.out.println("No es pot fer la reserva");
+                }
             }
         }
     }
@@ -159,7 +161,7 @@ public class PracticaUF4_17 {
         for (boolean[] seientFila : representacio.getSeients()) {
             System.out.print("|");
             for (boolean seient : seientFila) {
-                
+
                 if (seient) {
                     System.out.print("*|");
                 } else {
@@ -171,7 +173,7 @@ public class PracticaUF4_17 {
     }
 
     private static void reservaLlotges(Representacio representacio) {
-        if (representacio.llotgesDisponibles() > 0) {
+        if (representacio.getEspectacle().getLlotges()) {
             System.out.println("Reservar llotja?");
             int opcio = Menu("Si", "No");
             if (opcio == 1) {
@@ -203,7 +205,8 @@ public class PracticaUF4_17 {
         int year = llegirInt("Any: ");
         for (Representacio representacio : llistaRepresentacions) {
             LocalDateTime data = representacio.getDate();
-            if(data.getDayOfMonth()==day&&data.getMonthValue()==month&&data.getYear()==year){
+            if (data.getDayOfMonth() == day && data.getMonthValue() == month
+                    && data.getYear() == year) {
                 System.out.println(representacio.getNomRepresentacio());
             }
         }

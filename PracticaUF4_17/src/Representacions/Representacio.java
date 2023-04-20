@@ -6,9 +6,7 @@ package Representacions;
 
 import Espectacles.Espectacle;
 import Recintes.Recinte;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  *
